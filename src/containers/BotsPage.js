@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import BotCollection from "./BotCollection";
 import YourBotArmy from "./YourBotArmy";
 import BotSpecs from "../components/BotSpecs";
+import Filter from "../components/Filter";
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -9,7 +10,8 @@ class BotsPage extends React.Component {
     super();
     this.state = {
       bots: [],
-      show: null
+      show: null,
+      filter: "all"
     };
   }
 
@@ -46,6 +48,13 @@ class BotsPage extends React.Component {
     });
   };
 
+  handleChange = e => {
+    // console.log(e.target.value)
+    this.setState({
+      filter: e.target.value
+    });
+  };
+
   componentDidMount() {
     fetch("https://bot-battler-api.herokuapp.com/api/v1/bots")
       .then(response => response.json())
@@ -53,6 +62,11 @@ class BotsPage extends React.Component {
   }
 
   render() {
+    const filtered =
+      this.state.filter === "all"
+        ? this.state.bots
+        : this.state.bots.filter(bot => bot.bot_class === this.state.filter);
+
     return (
       <div>
         {/* put your components here */}
@@ -67,11 +81,14 @@ class BotsPage extends React.Component {
             enlist={this.enlist}
           />
         ) : (
-          <BotCollection
-            bots={this.state.bots}
-            // enlist={this.enlist}
-            show={this.show}
-          />
+          <Fragment>
+            <Filter handleChange={this.handleChange} selected={this.state.filter} />
+            <BotCollection
+              bots={filtered}
+              // enlist={this.enlist}
+              show={this.show}
+            />
+          </Fragment>
         )}
       </div>
     );

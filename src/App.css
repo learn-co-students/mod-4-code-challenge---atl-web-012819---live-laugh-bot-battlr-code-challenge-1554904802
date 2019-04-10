@@ -12,3 +12,11 @@
 .ui.grid {
   padding: 0px 20px;
 }
+
+#filter {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  margin-bottom: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
