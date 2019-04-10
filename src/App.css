@@ -14,9 +14,14 @@
 }
 
 #filter {
-  padding-top: 10px;
-  padding-bottom: 30px;
+  background: #eee;
+  padding-top: 15px;
+  padding-bottom: 20px;
   margin-bottom: 15px;
   text-align: center;
   border-bottom: 1px solid #ccc;
+}
+
+#filter label {
+  padding-right: 5px;
 }

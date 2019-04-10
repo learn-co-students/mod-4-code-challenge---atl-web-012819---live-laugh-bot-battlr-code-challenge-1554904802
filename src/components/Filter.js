@@ -3,7 +3,7 @@ import React from "react";
 const Filter = props => {
   return (
     <div id="filter">
-      <label htmlFor="type">Filter By Class: </label>
+      <label htmlFor="type">Filter By Class:</label>
       <select
         name="type"
         id="type"

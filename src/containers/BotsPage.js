@@ -42,7 +42,7 @@ class BotsPage extends React.Component {
   };
 
   show = bot => {
-    console.log("Show: ", bot);
+    // console.log("Show: ", bot);
     this.setState({
       show: bot
     });
