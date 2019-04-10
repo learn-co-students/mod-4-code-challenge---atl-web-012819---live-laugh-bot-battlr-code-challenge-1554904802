@@ -3,17 +3,21 @@ import BotCard from "../components/BotCard";
 
 class BotCollection extends React.Component {
 
-    mapBots = () => {
-        return this.props.bots.map((bot) => {
-            return <BotCard key={bot.id} bot={bot} addBot={this.props.addBot}/>
-        })
+
+    renderBot = () => {
+        return this.props.bots.map((bot) => <BotCard key={bot.id} bot={bot} handleBotSpecsState={this.props.handleBotSpecsState} /> )
     }
+    // renderBot = () => {
+    //     return this.props.bots.map((bot) => {
+    //         return <BotCard key={bot.id} bot={bot} handleBotSpecsState={this.props.handleBotSpecsState} />
+    //     })
+    // }
 
     render(){
         return (
             <div className="ui four column grid">
                 <div className="row">
-                    {this.mapBots()}
+                    {this.renderBot()}
                 </div>
             </div>
         );
