@@ -21,7 +21,7 @@ class BotCollection extends React.Component {
 						 <BotCard 
 						 key={bot.id}
 						 bot={bot} 
-						 handleClick={this.props.handleClick}/>) )}
+						 handleClick={this.props.handleShow}/>) )}
     		</div>
   	  </div>
   	);

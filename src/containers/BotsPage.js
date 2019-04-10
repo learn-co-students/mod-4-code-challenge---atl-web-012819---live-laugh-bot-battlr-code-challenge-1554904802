@@ -44,7 +44,7 @@ class BotsPage extends React.Component {
   handleRemove = (bot) =>{
     console.log('removing bot', bot)
     const botIndex = this.state.army.indexOf(bot)
-    const newArmy = this.state.army.slice()
+    const newArmy = [...this.state.army]
     //delete from our army
     newArmy.splice(botIndex,1)
     this.setState({army:newArmy})
@@ -75,7 +75,7 @@ class BotsPage extends React.Component {
         
         {this.state.selectedBot === null ?
           <BotCollection 
-          handleClick={this.handleShow} 
+          handleShow={this.handleShow} 
           handleFilter={this.handleFilter}
           filterType={this.state.filterType}
           bots={this.botsToShow()} />
