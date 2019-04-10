@@ -56,7 +56,6 @@ const BotCard = props => {
       </div>
     </div>
   );
-
 };
 
 export default BotCard;

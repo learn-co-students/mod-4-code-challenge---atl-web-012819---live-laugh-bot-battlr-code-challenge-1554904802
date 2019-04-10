@@ -60,18 +60,13 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={() =>
-                props.handleGoBackClick()
-              }
+              onClick={() => props.handleGoBackClick()}
             >
               Go Back
             </button>
             <button
               className="ui button fluid"
-              onClick={() => (
-                props.handleEnlistClick(bot.id)
-                )
-              }
+              onClick={() => props.handleEnlistClick(bot.id)}
             >
               Enlist
             </button>
@@ -80,7 +75,6 @@ const BotSpecs = props => {
       </div>
     </div>
   );
-
 };
 
 export default BotSpecs;
