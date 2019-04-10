@@ -8,7 +8,8 @@ class BotsPage extends React.Component {
 
   state = {
     bots: [],
-    selectedBots: []
+    selectedBots: [],
+    clickedBot: null
   }
 
   handleData = (data) => {
@@ -18,15 +19,24 @@ class BotsPage extends React.Component {
   }
 
   handleClick = (botId) => {
-    if (this.findSelectedBotById(botId)) {
+    this.setState({
+      clickedBot: this.findBotById(botId)
+    })
+  }
+
+  handleEnlistClick = (botId) => {
+    if (!this.findSelectedBotById(botId)) {
       this.setState({
-        selectedBots: this.state.selectedBots.filter(bot => bot.id !== botId)
-      })
-    } else {
-      this.setState({
-        selectedBots: this.state.selectedBots.concat(this.findBotById(botId))
+        selectedBots: this.state.selectedBots.concat(this.findBotById(botId)),
+        clickedBot: null
       })
     }
+  }
+
+  handleGoBackClick = () => {
+    this.setState({
+      clickedBot: null
+    })
   }
 
   findBotById = (botId) => {
@@ -46,8 +56,13 @@ class BotsPage extends React.Component {
   render() {
     return (
       <div>
-        <YourBotArmy selectedBots={this.state.selectedBots} handleClick={this.handleClick}/>
-        <BotCollection bots={this.state.bots} handleClick = {this.handleClick}/>
+        <YourBotArmy selectedBots={this.state.selectedBots}
+                     handleClick={this.handleClick} />
+        <BotCollection bots={this.state.bots} 
+                       handleClick={this.handleClick}
+                       clickedBot={this.state.clickedBot}
+                       handleEnlistClick={this.handleEnlistClick}
+                       handleGoBackClick={this.handleGoBackClick}/>
       </div>
     );
   }
