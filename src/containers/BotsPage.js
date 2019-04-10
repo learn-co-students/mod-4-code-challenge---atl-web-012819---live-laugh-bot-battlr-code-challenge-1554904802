@@ -8,7 +8,9 @@ class BotsPage extends React.Component {
   //start here with your code for step one
 
 	state = {
-		bots: []
+		bots: [],
+		showSpecs: false,        // Need this to change between Specs and Container
+		clickedBot: null
 	}
 
 	componentDidMount() {
