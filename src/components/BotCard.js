@@ -1,7 +1,12 @@
 import React from "react";
 
 const BotCard = props => {
-  const { bot } = props;
+
+    const { bot, handleBotSpecsState } = props;
+
+    let handleClick = () => {
+        handleBotSpecsState(bot)
+    }
 
   let botType;
 
@@ -21,11 +26,7 @@ const BotCard = props => {
 
   return (
     <div className="ui column">
-      <div
-        className="ui card"
-        key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
-      >
+      <div className="ui card" key={bot.id} onClick={handleClick} >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
         </div>

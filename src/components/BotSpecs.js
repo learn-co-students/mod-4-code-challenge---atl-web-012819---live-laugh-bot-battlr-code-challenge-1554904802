@@ -1,7 +1,17 @@
 import React from "react";
 
 const BotSpecs = props => {
-  let { bot } = props;
+    let { bot, enlistBot, handleBackToCollection } = props;
+
+    let handleBackClick = (e) => {
+        console.log(e.target.name.value)
+        handleBackToCollection()
+    }
+
+    let handleEnlistClick = (e) => {
+        console.log(e.target.name.value)
+        enlistBot(bot)
+    }
 
   let botType;
 
@@ -58,24 +68,8 @@ const BotSpecs = props => {
                 </div>
               </div>
             </div>
-            <button
-              className="ui button fluid"
-              onClick={() =>
-                console.log('connect this to a function that shows all bots')
-              }
-            >
-              Go Back
-            </button>
-            <button
-              className="ui button fluid"
-              onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
-              }
-            >
-              Enlist
-            </button>
+            <button className="ui button fluid" name='back' onClick={handleBackClick}>Go Back</button>
+            <button className="ui button fluid" name='enlist' onClick={handleEnlistClick}>Enlist</button>
           </div>
         </div>
       </div>
