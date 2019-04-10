@@ -1,13 +1,15 @@
 import React from "react";
 import BotCollection from './BotCollection';
 import BotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 const API_URL = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     bots: [],
-    army: []
+    army: [],
+    selectedBot: null
   }
   componentDidMount(){
     fetch(API_URL)
@@ -20,7 +22,7 @@ class BotsPage extends React.Component {
     .then(data=>this.setState({bots: data}))
   }
 
-  handleClick = (bot) => {
+  handleAdd = (bot) => {
     console.log('bot', bot)
     if(!this.state.army.includes(bot)){
       const newArmy = [...this.state.army, bot]
@@ -37,6 +39,13 @@ class BotsPage extends React.Component {
     newArmy.splice(botIndex,1)
     this.setState({army:newArmy})
   }
+  handleShow = (bot) => {
+    console.log('showing bot', bot)
+    this.setState({selectedBot:bot})
+  }
+  handleHide = () => {
+    this.setState({selectedBot: null})
+  }
 
   render() {
     return (
@@ -44,9 +53,17 @@ class BotsPage extends React.Component {
         <BotArmy 
         bots={this.state.army}
         handleRemove={this.handleRemove} />
-        <BotCollection 
-        handleClick={this.handleClick} 
-        bots={this.state.bots} />
+        
+        {this.state.selectedBot === null ?
+          <BotCollection 
+          handleClick={this.handleShow} 
+          bots={this.state.bots} />
+        :
+          <BotSpecs 
+          bot={this.state.selectedBot}
+          handleAdd={this.handleAdd}
+          handleHide={this.handleHide}/>
+        }
       </div>
     );
   }
