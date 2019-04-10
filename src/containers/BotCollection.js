@@ -1,5 +1,6 @@
 import React from "react";
 import BotCard from "../components/BotCard";
+import FilterBar from '../components/FilterBar';
 
 class BotCollection extends React.Component {
   //your code here
@@ -8,6 +9,13 @@ class BotCollection extends React.Component {
 		const {bots} = this.props
   	return (
   	  <div className="ui four column grid">
+				<div className="row">
+					<div className="column">
+						<FilterBar 
+						 handleFilter={this.props.handleFilter}
+						 filterType={this.props.filterType}/>
+					</div>
+				</div>
     		<div className="row">
     		  {bots.map((bot)=>(
 						 <BotCard 

@@ -2,6 +2,7 @@ import React from "react";
 import BotCollection from './BotCollection';
 import BotArmy from './YourBotArmy'
 import BotSpecs from '../components/BotSpecs'
+
 const API_URL = "https://bot-battler-api.herokuapp.com/api/v1/bots"
 
 class BotsPage extends React.Component {
@@ -9,7 +10,8 @@ class BotsPage extends React.Component {
   state = {
     bots: [],
     army: [],
-    selectedBot: null
+    selectedBot: null,
+    filterType: ""
   }
   componentDidMount(){
     fetch(API_URL)
@@ -22,9 +24,7 @@ class BotsPage extends React.Component {
     .then(data=>this.setState({bots: data}))
   }
 
-  handleAdd = (bot) => {
-    console.log('bot', bot)
-    
+  handleAdd = (bot) => {    
     if(!this.state.army.includes(bot)){
       const newArmy = [...this.state.army, bot]
       this.setState({
@@ -35,6 +35,12 @@ class BotsPage extends React.Component {
       alert("You already did that!")
     }
   }
+
+  handleFilter = (e) =>{
+    const newFilter = e.target.value
+    this.setState({filterType: newFilter})
+  }
+
   handleRemove = (bot) =>{
     console.log('removing bot', bot)
     const botIndex = this.state.army.indexOf(bot)
@@ -43,13 +49,22 @@ class BotsPage extends React.Component {
     newArmy.splice(botIndex,1)
     this.setState({army:newArmy})
   }
+
   handleShow = (bot) => {
     console.log('showing bot', bot)
     this.setState({selectedBot:bot})
   }
+
   handleHide = () => {
     this.setState({selectedBot: null})
   }
+
+  botsToShow(){
+    return this.state.bots.filter((bot)=>{
+      return bot.bot_class.includes(this.state.filterType)
+    })
+  }
+
 
   render() {
     return (
@@ -61,7 +76,9 @@ class BotsPage extends React.Component {
         {this.state.selectedBot === null ?
           <BotCollection 
           handleClick={this.handleShow} 
-          bots={this.state.bots} />
+          handleFilter={this.handleFilter}
+          filterType={this.state.filterType}
+          bots={this.botsToShow()} />
         :
           <BotSpecs 
           bot={this.state.selectedBot}
