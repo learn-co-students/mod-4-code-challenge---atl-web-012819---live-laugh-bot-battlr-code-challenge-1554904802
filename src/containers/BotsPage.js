@@ -24,9 +24,13 @@ class BotsPage extends React.Component {
 
   handleAdd = (bot) => {
     console.log('bot', bot)
+    
     if(!this.state.army.includes(bot)){
       const newArmy = [...this.state.army, bot]
-      this.setState({army: newArmy})
+      this.setState({
+        army: newArmy,
+        selectedBot:null
+      })
     }else{
       alert("You already did that!")
     }
